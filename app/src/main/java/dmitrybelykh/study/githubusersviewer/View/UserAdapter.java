@@ -19,7 +19,7 @@ import dmitrybelykh.study.githubusersviewer.R;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private List<User> mUserList = new ArrayList<>();
+    private List<User> mUserList = null;
     private LoadMoreListener mListener;
 
     @NonNull
@@ -38,7 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 .error(R.drawable.avatar_placeholder)
                 .into(holder.mAvatar);
         if (position == getItemCount() - 1 && mListener != null) {
-            mListener.loadMoreUsers(user.getId());
+            mListener.loadMoreUsers();
         }
     }
 
@@ -48,9 +48,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public void addUsers(List<User> newUsers) {
-        int size = getItemCount();
-        mUserList.addAll(newUsers);
-        notifyItemRangeInserted(size, newUsers.size());
+        mUserList = newUsers;
+        notifyDataSetChanged();
     }
 
     public void subscribe(LoadMoreListener mListener) {
@@ -74,6 +73,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public interface LoadMoreListener {
-        public void loadMoreUsers(long lastUserId);
+        public void loadMoreUsers();
     }
 }

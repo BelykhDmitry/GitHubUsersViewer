@@ -8,6 +8,4 @@ public interface UsersPresenter {
     public void onDetach();
 
     public void loadUsers();
-
-    public void loadMoreUsers();
 }

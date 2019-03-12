@@ -4,9 +4,7 @@ import java.util.List;
 
 public interface UserModel {
 
-    public void getUsers(UsersModelCallback<List<User>> callback);
-
-    public void getMoreUsers(UserModel.UsersModelCallback<List<User>> callback);
+    public void getUsers(long lastUserId, UsersModelCallback<List<User>> callback);
 
     public void cancelLoading();
 

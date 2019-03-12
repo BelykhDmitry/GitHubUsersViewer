@@ -1,5 +1,6 @@
 package dmitrybelykh.study.githubusersviewer.Presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dmitrybelykh.study.githubusersviewer.Model.User;
@@ -10,7 +11,7 @@ import dmitrybelykh.study.githubusersviewer.View.UsersView;
 
 public class UsersPresenterImpl implements UsersPresenter {
 
-    private List<User> mUsers; //Временно. При смене фрагмента писать в базу
+    private List<User> mUsers = new ArrayList<>(); //Временно. При смене фрагмента писать в базу
     private UsersView mListener = null;
     private UserModel mUserModel;
 
@@ -21,6 +22,7 @@ public class UsersPresenterImpl implements UsersPresenter {
     @Override
     public void onAttach(UsersView view) {
         mListener = view;
+        mListener.setUsers(mUsers);
     }
 
     @Override
@@ -31,33 +33,23 @@ public class UsersPresenterImpl implements UsersPresenter {
 
     @Override
     public void loadUsers() {
-        mUserModel.getUsers(new UserModel.UsersModelCallback<List<User>>() {
+        long id = 0;
+        if (mUsers.size() != 0) {
+            id = mUsers.get(mUsers.size() - 1).getId();
+        }
+        mUserModel.getUsers(id + 1, new UserModel.UsersModelCallback<List<User>>() {
             @Override
             public void onSuccess(List<User> response) {
-                //mUsers.addAll(response);
+                int size = mUsers.size();
+                mUsers.addAll(response);
                 if (mListener != null)
-                    mListener.setUsers(response);
+                    mListener.notifyUsersChanged(size, response.size());
             }
 
             @Override
             public void onError(Throwable error) {
                 if (mListener != null)
                     mListener.onError();
-            }
-        });
-    }
-
-    @Override
-    public void loadMoreUsers() {
-        mUserModel.getMoreUsers(new UserModel.UsersModelCallback<List<User>>() {
-            @Override
-            public void onSuccess(List<User> response) {
-
-            }
-
-            @Override
-            public void onError(Throwable error) {
-
             }
         });
     }

@@ -43,14 +43,22 @@ public class UsersFragment extends Fragment implements UsersView {
 
         mPresenter = ((App) getActivity().getApplication()).getUsersPresenter();
 
+        setupAdapter();
+
         return rootView;
+    }
+
+    private void setupAdapter() {
+        mUserAdapter.subscribe(() -> {
+            mPresenter.loadUsers();
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
         mPresenter.onAttach(this);
-        mPresenter.loadUsers();
+       mPresenter.loadUsers();
     }
 
     @Override
@@ -68,6 +76,11 @@ public class UsersFragment extends Fragment implements UsersView {
     @Override
     public void setUsers(List<User> users) {
         mUserAdapter.addUsers(users);
+    }
+
+    @Override
+    public void notifyUsersChanged(int position, int length) {
+        mUserAdapter.notifyItemRangeInserted(position, length);
     }
 
     @Override

@@ -15,8 +15,8 @@ public class GithubUsersModel implements UserModel {
 
     private GithubService service;
 
-    private Call<List<GithubUser>> githubUserCall;
-    private Call<List<GithubUser>> githubMoreUserCall;
+    private Call<List<GithubUser>> githubUserCall = null;
+    private Call<List<GithubUser>> githubMoreUserCall = null;
 
 
     public GithubUsersModel(GithubService service) {
@@ -24,9 +24,11 @@ public class GithubUsersModel implements UserModel {
     }
 
     @Override
-    public void getUsers(UserModel.UsersModelCallback<List<User>> callback) {
+    public void getUsers(long lastUserId, UserModel.UsersModelCallback<List<User>> callback) {
         Log.d("DDDD", "get");
-        githubUserCall = service.getUsers(0);
+        if (githubUserCall != null && !githubUserCall.isExecuted())
+            return;
+        githubUserCall = service.getUsers(lastUserId);
         githubUserCall
                 .enqueue(new Callback<List<GithubUser>>() {
                     @Override
@@ -43,24 +45,6 @@ public class GithubUsersModel implements UserModel {
                         callback.onError(t);
                     }
                 });
-    }
-
-    @Override
-    public void getMoreUsers(UserModel.UsersModelCallback<List<User>> callback) {
-//        if (callMoreUsers != null && !callMoreUsers.isExecuted())
-//            return;
-//        callMoreUsers = githubService.getUsers(userId);
-//        callMoreUsers.enqueue(new Callback<List<User>>() {
-//            @Override
-//            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-//                mUserAdapter.addUsers(response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<User>> call, Throwable t) {
-//                Toast.makeText(getContext(), R.string.error_loading_message, Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     @Override
