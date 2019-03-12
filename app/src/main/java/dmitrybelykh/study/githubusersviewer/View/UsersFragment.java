@@ -1,0 +1,77 @@
+package dmitrybelykh.study.githubusersviewer.View;
+
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import dmitrybelykh.study.githubusersviewer.App;
+import dmitrybelykh.study.githubusersviewer.Model.User;
+import dmitrybelykh.study.githubusersviewer.Presenter.UsersPresenter;
+import dmitrybelykh.study.githubusersviewer.R;
+
+public class UsersFragment extends Fragment implements UsersView {
+
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    private Unbinder unbinder;
+    private UserAdapter mUserAdapter;
+
+    private UsersPresenter mPresenter;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_recycler_view, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
+
+        mUserAdapter = new UserAdapter();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(mUserAdapter);
+        mRecyclerView.setHasFixedSize(true);
+
+        mPresenter = ((App) getActivity().getApplication()).getUsersPresenter();
+
+        return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.onAttach(this);
+        mPresenter.loadUsers();
+    }
+
+    @Override
+    public void onStop() {
+        mPresenter.onDetach();
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        unbinder.unbind();
+        super.onDestroyView();
+    }
+
+    @Override
+    public void setUsers(List<User> users) {
+        mUserAdapter.addUsers(users);
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(getContext(), R.string.error_loading_message, Toast.LENGTH_SHORT).show();
+    }
+}
