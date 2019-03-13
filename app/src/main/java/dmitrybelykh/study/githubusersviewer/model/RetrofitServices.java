@@ -1,10 +1,10 @@
-package dmitrybelykh.study.githubusersviewer.Model;
+package dmitrybelykh.study.githubusersviewer.model;
 
 import android.content.Context;
 
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
-import dmitrybelykh.study.githubusersviewer.Model.github.GithubService;
+import dmitrybelykh.study.githubusersviewer.model.github.GithubService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

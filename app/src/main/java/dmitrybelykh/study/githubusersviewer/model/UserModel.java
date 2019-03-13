@@ -1,4 +1,4 @@
-package dmitrybelykh.study.githubusersviewer.Model;
+package dmitrybelykh.study.githubusersviewer.model;
 
 import java.util.List;
 

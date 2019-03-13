@@ -1,4 +1,4 @@
-package dmitrybelykh.study.githubusersviewer.Model;
+package dmitrybelykh.study.githubusersviewer.model;
 
 import android.view.LayoutInflater;
 import android.view.View;

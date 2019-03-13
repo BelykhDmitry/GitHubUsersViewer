@@ -1,4 +1,4 @@
-package dmitrybelykh.study.githubusersviewer.View;
+package dmitrybelykh.study.githubusersviewer.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dmitrybelykh.study.githubusersviewer.R;

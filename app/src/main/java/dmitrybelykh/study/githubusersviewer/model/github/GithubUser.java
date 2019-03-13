@@ -1,8 +1,8 @@
-package dmitrybelykh.study.githubusersviewer.Model.github;
+package dmitrybelykh.study.githubusersviewer.model.github;
 
 import com.google.gson.annotations.SerializedName;
 
-import dmitrybelykh.study.githubusersviewer.Model.User;
+import dmitrybelykh.study.githubusersviewer.model.User;
 
 public class GithubUser {
     @SerializedName("login")

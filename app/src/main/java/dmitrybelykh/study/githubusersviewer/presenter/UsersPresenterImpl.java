@@ -1,13 +1,13 @@
-package dmitrybelykh.study.githubusersviewer.Presenter;
+package dmitrybelykh.study.githubusersviewer.presenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dmitrybelykh.study.githubusersviewer.Model.User;
-import dmitrybelykh.study.githubusersviewer.Model.UserModel;
-import dmitrybelykh.study.githubusersviewer.Model.github.GithubService;
-import dmitrybelykh.study.githubusersviewer.Model.github.GithubUsersModel;
-import dmitrybelykh.study.githubusersviewer.View.UsersView;
+import dmitrybelykh.study.githubusersviewer.model.User;
+import dmitrybelykh.study.githubusersviewer.model.UserModel;
+import dmitrybelykh.study.githubusersviewer.model.github.GithubService;
+import dmitrybelykh.study.githubusersviewer.model.github.GithubUsersModel;
+import dmitrybelykh.study.githubusersviewer.view.UsersView;
 
 public class UsersPresenterImpl implements UsersPresenter {
 

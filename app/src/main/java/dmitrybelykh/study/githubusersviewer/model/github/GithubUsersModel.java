@@ -1,12 +1,12 @@
-package dmitrybelykh.study.githubusersviewer.Model.github;
+package dmitrybelykh.study.githubusersviewer.model.github;
 
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dmitrybelykh.study.githubusersviewer.Model.User;
-import dmitrybelykh.study.githubusersviewer.Model.UserModel;
+import dmitrybelykh.study.githubusersviewer.model.User;
+import dmitrybelykh.study.githubusersviewer.model.UserModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

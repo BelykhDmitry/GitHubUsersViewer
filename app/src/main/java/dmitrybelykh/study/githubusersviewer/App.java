@@ -2,9 +2,9 @@ package dmitrybelykh.study.githubusersviewer;
 
 import android.app.Application;
 
-import dmitrybelykh.study.githubusersviewer.Model.RetrofitServices;
-import dmitrybelykh.study.githubusersviewer.Presenter.UsersPresenter;
-import dmitrybelykh.study.githubusersviewer.Presenter.UsersPresenterImpl;
+import dmitrybelykh.study.githubusersviewer.model.RetrofitServices;
+import dmitrybelykh.study.githubusersviewer.presenter.UsersPresenter;
+import dmitrybelykh.study.githubusersviewer.presenter.UsersPresenterImpl;
 
 public class App extends Application {
 

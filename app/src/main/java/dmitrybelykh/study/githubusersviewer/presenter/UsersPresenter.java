@@ -1,6 +1,6 @@
-package dmitrybelykh.study.githubusersviewer.Presenter;
+package dmitrybelykh.study.githubusersviewer.presenter;
 
-import dmitrybelykh.study.githubusersviewer.View.UsersView;
+import dmitrybelykh.study.githubusersviewer.view.UsersView;
 
 public interface UsersPresenter {
     public void handleOnStart(UsersView view);

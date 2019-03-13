@@ -1,4 +1,4 @@
-package dmitrybelykh.study.githubusersviewer.View;
+package dmitrybelykh.study.githubusersviewer.view;
 
 
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dmitrybelykh.study.githubusersviewer.App;
-import dmitrybelykh.study.githubusersviewer.Model.User;
-import dmitrybelykh.study.githubusersviewer.Model.UserAdapter;
-import dmitrybelykh.study.githubusersviewer.Presenter.UsersPresenter;
+import dmitrybelykh.study.githubusersviewer.model.User;
+import dmitrybelykh.study.githubusersviewer.model.UserAdapter;
+import dmitrybelykh.study.githubusersviewer.presenter.UsersPresenter;
 import dmitrybelykh.study.githubusersviewer.R;
 
 public class UsersFragment extends Fragment implements UsersView {

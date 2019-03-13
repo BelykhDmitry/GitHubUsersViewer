@@ -1,8 +1,8 @@
-package dmitrybelykh.study.githubusersviewer.View;
+package dmitrybelykh.study.githubusersviewer.view;
 
 import java.util.List;
 
-import dmitrybelykh.study.githubusersviewer.Model.User;
+import dmitrybelykh.study.githubusersviewer.model.User;
 
 public interface UsersView {
     public void setUsers(List<User> users);
