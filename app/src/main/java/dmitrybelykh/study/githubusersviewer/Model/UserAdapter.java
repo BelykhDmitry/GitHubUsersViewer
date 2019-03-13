@@ -19,6 +19,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     private List<User> mUserList = null;
     private LoadMoreListener mListener;
+    private final float LOAD_FACTOR = 0.75f;
 
     @NonNull
     @Override
@@ -36,7 +37,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 .apply(RequestOptions.circleCropTransform())
                 .error(R.drawable.avatar_placeholder)
                 .into(holder.mAvatar);
-        if (position == getItemCount() - 1 && mListener != null) {
+        if (position == (int)(LOAD_FACTOR * (getItemCount() - 1)) && mListener != null) {
             mListener.loadMoreUsers();
         }
     }
