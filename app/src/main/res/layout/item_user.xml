@@ -25,4 +25,20 @@
         android:textSize="24sp"
         tools:text="Petya" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_url"
+        android:layout_width="wrap_content"
+        android:autoLink="web"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_toRightOf="@id/user_avatar"
+        android:autoText="false"
+        android:textSize="16sp"
+        android:autoSizeMinTextSize="8sp"
+        android:autoSizeMaxTextSize="16sp"
+        android:autoSizeStepGranularity="2sp"
+        tools:text="Petya" />
+
 </RelativeLayout>

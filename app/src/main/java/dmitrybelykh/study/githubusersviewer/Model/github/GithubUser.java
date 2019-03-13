@@ -11,8 +11,10 @@ public class GithubUser {
     String avatar;
     @SerializedName("id")
     long id;
+    @SerializedName("html_url")
+    String htmlUrl;
 
     public User mapToUser() {
-        return new User(name, avatar, id);
+        return new User(name, avatar, id, htmlUrl);
     }
 }

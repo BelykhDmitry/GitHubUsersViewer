@@ -37,7 +37,7 @@ public class UsersPresenterImpl implements UsersPresenter {
         if (mUsers.size() != 0) {
             id = mUsers.get(mUsers.size() - 1).getId();
         }
-        mUserModel.getUsers(id + 1, new UserModel.UsersModelCallback<List<User>>() {
+        mUserModel.getUsers(id, new UserModel.UsersModelCallback<List<User>>() {
             @Override
             public void onSuccess(List<User> response) {
                 int size = mUsers.size();

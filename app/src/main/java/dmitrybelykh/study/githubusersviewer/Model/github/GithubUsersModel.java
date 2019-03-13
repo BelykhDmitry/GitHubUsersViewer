@@ -16,8 +16,6 @@ public class GithubUsersModel implements UserModel {
     private GithubService service;
 
     private Call<List<GithubUser>> githubUserCall = null;
-    private Call<List<GithubUser>> githubMoreUserCall = null;
-
 
     public GithubUsersModel(GithubService service) {
         this.service = service;
@@ -51,7 +49,5 @@ public class GithubUsersModel implements UserModel {
     public void cancelLoading() {
         if (githubUserCall != null && githubUserCall.isExecuted())
             githubUserCall.cancel();
-        if (githubMoreUserCall != null && githubMoreUserCall.isExecuted())
-            githubMoreUserCall.cancel();
     }
 }

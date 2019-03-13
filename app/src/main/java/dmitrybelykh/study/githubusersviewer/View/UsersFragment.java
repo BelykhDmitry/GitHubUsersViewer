@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dmitrybelykh.study.githubusersviewer.App;
 import dmitrybelykh.study.githubusersviewer.Model.User;
+import dmitrybelykh.study.githubusersviewer.Model.UserAdapter;
 import dmitrybelykh.study.githubusersviewer.Presenter.UsersPresenter;
 import dmitrybelykh.study.githubusersviewer.R;
 
@@ -58,7 +59,7 @@ public class UsersFragment extends Fragment implements UsersView {
     public void onStart() {
         super.onStart();
         mPresenter.onAttach(this);
-       mPresenter.loadUsers();
+        mPresenter.loadUsers();
     }
 
     @Override
