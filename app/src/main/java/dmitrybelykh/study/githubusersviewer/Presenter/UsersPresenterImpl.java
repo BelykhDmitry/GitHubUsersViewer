@@ -20,13 +20,13 @@ public class UsersPresenterImpl implements UsersPresenter {
     }
 
     @Override
-    public void onAttach(UsersView view) {
+    public void handleOnStart(UsersView view) {
         mListener = view;
         mListener.setUsers(mUsers);
     }
 
     @Override
-    public void onDetach() {
+    public void handleOnStop() {
         mListener = null;
         mUserModel.cancelLoading();
     }

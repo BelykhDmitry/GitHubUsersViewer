@@ -58,13 +58,13 @@ public class UsersFragment extends Fragment implements UsersView {
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.onAttach(this);
+        mPresenter.handleOnStart(this);
         mPresenter.loadUsers();
     }
 
     @Override
     public void onStop() {
-        mPresenter.onDetach();
+        mPresenter.handleOnStop();
         super.onStop();
     }
 
