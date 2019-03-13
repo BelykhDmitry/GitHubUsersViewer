@@ -23,6 +23,8 @@ public class UsersPresenterImpl implements UsersPresenter {
     public void handleOnStart(UsersView view) {
         mListener = view;
         mListener.setUsers(mUsers);
+        if (mUsers.size() == 0)
+            loadUsers();
     }
 
     @Override
