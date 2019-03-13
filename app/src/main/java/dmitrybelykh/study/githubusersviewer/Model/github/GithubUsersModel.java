@@ -23,19 +23,21 @@ public class GithubUsersModel implements UserModel {
 
     @Override
     public void getUsers(long lastUserId, UserModel.UsersModelCallback<List<User>> callback) {
-        Log.d("DDDD", "get");
         if (githubUserCall != null && !githubUserCall.isExecuted())
             return;
+        Log.d("DDDD", "get");
         githubUserCall = service.getUsers(lastUserId);
         githubUserCall
                 .enqueue(new Callback<List<GithubUser>>() {
                     @Override
                     public void onResponse(Call<List<GithubUser>> call, Response<List<GithubUser>> response) {
-                        ArrayList<User> users = new ArrayList<>(response.body().size());
-                        for (GithubUser githubUser : response.body()) {
-                            users.add(githubUser.mapToUser());
+                        if (response.code() == 200) {
+                            ArrayList<User> users = new ArrayList<>(response.body().size());
+                            for (GithubUser githubUser : response.body()) {
+                                users.add(githubUser.mapToUser());
+                            }
+                            callback.onSuccess(users);
                         }
-                        callback.onSuccess(users);
                     }
 
                     @Override
