@@ -29,11 +29,4 @@ public class App extends Application {
         }
         return usersPresenter;
     }
-
-    @Override
-    public void onTerminate() {
-        if (usersPresenter != null)
-            usersPresenter.onTerminate();
-        super.onTerminate();
-    }
 }

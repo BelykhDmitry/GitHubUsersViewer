@@ -2,11 +2,11 @@ package dmitrybelykh.study.githubusersviewer.model;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 public interface UserModel {
 
-    public void getUsers(long lastUserId, UsersModelCallback<List<User>> callback);
-
-    public void cancelLoading();
+    public Single<List<User>> getUsers(long lastUserId);
 
     public interface UsersModelCallback<T> {
         public void onSuccess(T response);
