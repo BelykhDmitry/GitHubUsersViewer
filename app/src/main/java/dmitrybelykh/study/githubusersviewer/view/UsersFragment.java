@@ -63,9 +63,11 @@ public class UsersFragment extends Fragment implements UsersView {
 
     @Override
     public void onDestroyView() {
+        mUserAdapter.unsubscribe();
         unbinder.unbind();
         if (getActivity().isFinishing())
             mPresenter.onTerminate();
+        mPresenter = null;
         super.onDestroyView();
     }
 
