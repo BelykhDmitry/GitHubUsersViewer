@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
@@ -84,5 +86,12 @@ public class UsersFragment extends Fragment implements UsersView {
     @Override
     public void onError() {
         Toast.makeText(getContext(), R.string.error_loading_message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 }
