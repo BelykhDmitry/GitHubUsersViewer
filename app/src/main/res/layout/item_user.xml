@@ -36,6 +36,7 @@
         android:layout_toRightOf="@id/user_avatar"
         android:autoText="false"
         android:textSize="16sp"
+        android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="8sp"
         android:autoSizeMaxTextSize="16sp"
         android:autoSizeStepGranularity="2sp"
