@@ -58,6 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public void unsubscribe() {
         mListener = null;
+        mUserList = null;
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
