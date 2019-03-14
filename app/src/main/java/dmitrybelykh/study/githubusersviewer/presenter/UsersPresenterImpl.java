@@ -45,6 +45,7 @@ public class UsersPresenterImpl implements UsersPresenter {
         }
         if (disposable == null || disposable.isDisposed()) {
             disposable = mUserModel.getUsers(id)
+                    .retry(2)
                     .doOnSuccess(list -> mUsers.addAll(list))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
