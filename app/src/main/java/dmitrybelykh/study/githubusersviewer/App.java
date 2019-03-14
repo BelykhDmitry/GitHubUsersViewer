@@ -47,4 +47,12 @@ public class App extends Application {
         }
         return usersPresenter;
     }
+
+    @Override
+    public void onTerminate() {
+        usersPresenter.onTerminate();
+        usersPresenter = null;
+        retrofitServices = null;
+        super.onTerminate();
+    }
 }
