@@ -37,14 +37,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 .apply(RequestOptions.circleCropTransform())
                 .error(R.drawable.avatar_placeholder)
                 .into(holder.mAvatar);
-        if (position == (getItemCount() - 1) && mListener != null) {
-            mListener.loadMoreUsers();
-        }
+            if (mListener != null && mUserList != null && position == (getItemCount() - 1)) {
+                mListener.loadMoreUsers();
+            }
     }
 
     @Override
     public int getItemCount() {
-        return mUserList.size();
+        return mUserList != null ? mUserList.size() : 0;
     }
 
     public void addUsers(List<User> newUsers) {
@@ -58,6 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public void unsubscribe() {
         mListener = null;
+        mUserList = null;
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {

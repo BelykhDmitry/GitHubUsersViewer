@@ -8,12 +8,17 @@ import dmitrybelykh.study.githubusersviewer.model.UserModel;
 import dmitrybelykh.study.githubusersviewer.model.github.GithubService;
 import dmitrybelykh.study.githubusersviewer.model.github.GithubUsersModel;
 import dmitrybelykh.study.githubusersviewer.view.UsersView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class UsersPresenterImpl implements UsersPresenter {
 
     private List<User> mUsers = new ArrayList<>(); //Временно. При смене фрагмента писать в базу
+    private int size = 0;
     private UsersView mListener = null;
     private UserModel mUserModel;
+    private Disposable disposable;
 
     public UsersPresenterImpl(GithubService service) {
         mUserModel = new GithubUsersModel(service);
@@ -30,33 +35,32 @@ public class UsersPresenterImpl implements UsersPresenter {
     @Override
     public void handleOnStop() {
         mListener = null;
-        mUserModel.cancelLoading();
     }
 
     @Override
     public void loadUsers() {
         long id = 0;
-        if (mUsers.size() != 0) {
+        if (size != 0) {
             id = mUsers.get(mUsers.size() - 1).getId();
         }
-        mUserModel.getUsers(id, new UserModel.UsersModelCallback<List<User>>() {
-            @Override
-            public void onSuccess(List<User> response) {
-                int size = mUsers.size();
-                mUsers.addAll(response);
-                if (mListener != null)
-                    mListener.notifyUsersChanged(size, response.size());
-            }
-
-            @Override
-            public void onError(Throwable error) {
-                if (mListener != null)
-                    mListener.onError();
-            }
-        });
+        if (disposable == null || disposable.isDisposed()) {
+            disposable = mUserModel.getUsers(id)
+                    .retry(2)
+                    .doOnSuccess(list -> mUsers.addAll(list))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .filter(users -> mListener != null)
+                    .subscribe(users -> {
+                                mListener.notifyUsersChanged(size, users.size());
+                                size = mUsers.size();
+                            },
+                            error -> mListener.onError());
+        }
     }
 
+    @Override
     public void onTerminate() {
-        mUserModel.cancelLoading();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
     }
 }

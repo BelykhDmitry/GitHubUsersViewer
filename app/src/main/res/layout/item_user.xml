@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginVertical="8dp"
+    android:layout_marginVertical="4dp"
     android:background="@android:color/white"
     app:elevation="4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/user_avatar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
         android:layout_margin="8dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -36,6 +37,7 @@
         android:layout_toRightOf="@id/user_avatar"
         android:autoText="false"
         android:textSize="16sp"
+        android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="8sp"
         android:autoSizeMaxTextSize="16sp"
         android:autoSizeStepGranularity="2sp"

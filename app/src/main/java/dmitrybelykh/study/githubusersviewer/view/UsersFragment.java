@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
@@ -16,10 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dmitrybelykh.study.githubusersviewer.App;
+import dmitrybelykh.study.githubusersviewer.R;
 import dmitrybelykh.study.githubusersviewer.model.User;
 import dmitrybelykh.study.githubusersviewer.model.UserAdapter;
 import dmitrybelykh.study.githubusersviewer.presenter.UsersPresenter;
-import dmitrybelykh.study.githubusersviewer.R;
 
 public class UsersFragment extends Fragment implements UsersView {
 
@@ -44,15 +46,9 @@ public class UsersFragment extends Fragment implements UsersView {
 
         mPresenter = ((App) getActivity().getApplication()).getUsersPresenter();
 
-        setupAdapter();
+        mUserAdapter.subscribe(() -> mPresenter.loadUsers());
 
         return rootView;
-    }
-
-    private void setupAdapter() {
-        mUserAdapter.subscribe(() -> {
-            mPresenter.loadUsers();
-        });
     }
 
     @Override
@@ -69,7 +65,11 @@ public class UsersFragment extends Fragment implements UsersView {
 
     @Override
     public void onDestroyView() {
+        mUserAdapter.unsubscribe();
         unbinder.unbind();
+        if (getActivity().isFinishing())
+            mPresenter.onTerminate();
+        mPresenter = null;
         super.onDestroyView();
     }
 
@@ -86,5 +86,12 @@ public class UsersFragment extends Fragment implements UsersView {
     @Override
     public void onError() {
         Toast.makeText(getContext(), R.string.error_loading_message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 }

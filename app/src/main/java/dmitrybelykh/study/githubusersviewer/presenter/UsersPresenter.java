@@ -8,4 +8,6 @@ public interface UsersPresenter {
     public void handleOnStop();
 
     public void loadUsers();
+
+    public void onTerminate();
 }
